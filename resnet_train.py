@@ -50,7 +50,10 @@ net = tflearn.regression(net, optimizer=mom,
 model = tflearn.DNN(net, checkpoint_path='../../checkpoints/resnet_sat6',
                     max_checkpoints=1, tensorboard_verbose=3)
 
-model.fit(X, y, n_epoch=200, validation_set=(X_test, y_test),
-          snapshot_epoch=False, snapshot_step=500,
-          show_metric=True, batch_size=256, shuffle=True,
-          run_id='resnet_sat6')
+model.load('../../checkpoints/resnet_sat6-4500')
+#model.fit(X, y, n_epoch=200, validation_set=(X_test, y_test),
+#          snapshot_epoch=False, snapshot_step=500,
+#          show_metric=True, batch_size=256, shuffle=True,
+#          run_id='resnet_sat6')
+
+print(model.evaluate(X_test, y_test, batch_size=512))
